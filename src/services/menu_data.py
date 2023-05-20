@@ -1,5 +1,5 @@
-from models.dish import Dish
-from models.ingredient import Ingredient
+from src.models.dish import Dish
+from src.models.ingredient import Ingredient
 import csv
 
 # Req 3
@@ -29,6 +29,12 @@ class MenuData:
                 return dish
         return None
 
+    def get_all_dishes(self) -> list:
+        return self.dishes
 
-menu_data = MenuData('data/menu_base_data.csv')
-print(menu_data.dishes)
+    def get_dishes_without_restrictions(self, restriction) -> list:
+        return [
+            dish
+            for dish in self.dishes
+            if restriction not in dish.get_restrictions()
+        ]
